@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>40대 중년 남자의 운동일지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* 내비게이션 */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            z-index: 1000;
+            border-bottom-left-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        nav a:hover {
+            background: #4CAF50;
+            transform: translateY(-2px);
+        }
+
+        /* 인트로 섹션 */
+        #intro {
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #intro::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .intro-content {
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .intro-image {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            box-shadow: 0 20px 60px rgba(76, 175, 80, 0.4);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-image::before {
+            content: '💪';
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .intro-content h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro-content p {
+            font-size: 1.5em;
+            opacity: 0.9;
+        }
+
+        /* 섹션 공통 스타일 */
+        section {
+            padding: 100px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #1a1a2e;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Daily 운동일지 */
+        #daily {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .workout-log {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .log-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .log-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .log-card h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .log-card .date {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .exercise-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+
+        .exercise-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .exercise-detail {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* 노하우 섹션 */
+        #knowhow {
+            background: #fff;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: scale(1.05);
+        }
+
+        .tip-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .tip-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        /* 연락처 섹션 */
+        #contact {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+        }
+
+        #contact h2 {
+            color: #fff;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 50px auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: #fff;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .intro-content h1 {
+                font-size: 2em;
+            }
+
+            .intro-content p {
+                font-size: 1.2em;
+            }
+
+            .intro-image {
+                width: 200px;
+                height: 200px;
+                font-size: 60px;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            section {
+                padding: 60px 15px;
+            }
+        }
+
+        /* 스크롤 애니메이션 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 내비게이션 -->
+    <nav>
+        <ul>
+            <li><a href="#intro">홈</a></li>
+            <li><a href="#daily">운동일지</a></li>
+            <li><a href="#knowhow">노하우</a></li>
+            <li><a href="#contact">연락처</a></li>
+        </ul>
+    </nav>
+
+    <!-- 인트로 섹션 -->
+    <section id="intro">
+        <div class="intro-content">
+            <div class="intro-image"></div>
+            <h1>40대, 다시 시작하는 운동</h1>
+            <p>건강한 꽃중년을 위한 운동 여정</p>
+        </div>
+    </section>
+
+    <!-- Daily 운동일지 -->
+    <section id="daily">
+        <div class="container">
+            <h2 class="fade-in">Daily 운동일지</h2>
+            <div class="workout-log">
+                <div class="log-card fade-in">
+                    <h3>월요일 - 상체 운동</h3>
+                    <div class="date">2025.09.30</div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">벤치프레스</span>
+                        <span class="exercise-detail">60kg × 12회 × 4세트</span>
+                    </div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">덤벨 플라이</span>
+                        <span class="exercise-detail">15kg × 15회 × 3세트</span>
+                    </div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">숄더 프레스</span>
+                        <span class="exercise-detail">12kg × 12회 × 4세트</span>
+                    </div>
+                </div>
+
+                <div class="log-card fade-in">
+                    <h3>수요일 - 하체 운동</h3>
+                    <div class="date">2025.10.02</div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">스쿼트</span>
+                        <span class="exercise-detail">80kg × 10회 × 4세트</span>
+                    </div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">레그 프레스</span>
+                        <span class="exercise-detail">120kg × 12회 × 3세트</span>
+                    </div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">런지</span>
+                        <span class="exercise-detail">20kg × 15회 × 3세트</span>
+                    </div>
+                </div>
+
+                <div class="log-card fade-in">
+                    <h3>금요일 - 등/팔 운동</h3>
+                    <div class="date">2025.10.04</div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">랫풀다운</span>
+                        <span class="exercise-detail">50kg × 12회 × 4세트</span>
+                    </div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">바벨 로우</span>
+                        <span class="exercise-detail">45kg × 10회 × 3세트</span>
+                    </div>
+                    <div class="exercise-item">
+                        <span class="exercise-name">덤벨 컬</span>
+                        <span class="exercise-detail">12kg × 15회 × 3세트</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 노하우 섹션 -->
+    <section id="knowhow">
+        <div class="container">
+            <h2 class="fade-in">40대 운동 노하우</h2>
+            <div class="tips-grid">
+                <div class="tip-card fade-in">
+                    <div class="tip-icon">🏃</div>
+                    <h3>워밍업 필수</h3>
+                    <p>최소 10분 이상 충분한 준비운동으로 부상을 예방하세요</p>
+                </div>
+                <div class="tip-card fade-in">
+                    <div class="tip-icon">⏰</div>
+                    <h3>규칙적인 루틴</h3>
+                    <p>일주일에 3-4회, 같은 시간대에 운동하는 습관을 만드세요</p>
+                </div>
+                <div class="tip-card fade-in">
+                    <div class="tip-icon">💧</div>
+                    <h3>충분한 수분 섭취</h3>
+                    <p>운동 전후로 물을 충분히 마셔 탈수를 예방하세요</p>
+                </div>
+                <div class="tip-card fade-in">
+                    <div class="tip-icon">😴</div>
+                    <h3>휴식과 회복</h3>
+                    <p>근육 성장에는 충분한 수면과 휴식이 필수입니다</p>
+                </div>
+                <div class="tip-card fade-in">
+                    <div class="tip-icon">🥗</div>
+                    <h3>단백질 섭취</h3>
+                    <p>체중 1kg당 1.5-2g의 단백질로 근육을 키우세요</p>
+                </div>
+                <div class="tip-card fade-in">
+                    <div class="tip-icon">📈</div>
+                    <h3>점진적 과부하</h3>
+                    <p>무리하지 않고 서서히 중량과 강도를 높이세요</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 연락처 섹션 -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="fade-in">연락하기</h2>
+            <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">메시지</label>
+                    <textarea id="message" name="message" placeholder="궁금하신 점을 남겨주세요" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">메시지 보내기</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // 스크롤 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 폼 제출
+        function handleSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            alert(`메시지가 전송되었습니다!\n\n이름: ${name}\n이메일: ${email}\n\n감사합니다!`);
+            e.target.reset();
+        }
+
+        // 운동일지 카드 클릭 효과
+        document.querySelectorAll('.log-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
