@@ -22,6 +22,7 @@
         nav {
             position: fixed;
             top: 0;
+            left: 0;
             right: 0;
             background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(10px);
@@ -29,9 +30,14 @@
             z-index: 1000;
             border-bottom-left-radius: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+            display: flex;
+            justify-content: space-between; /* 좌-우 배치 */
+            align-items: center;
         }
 
-        nav ul {
+        .nav-left ul,
+        .nav-right ul {
             list-style: none;
             display: flex;
             gap: 30px;
@@ -329,11 +335,8 @@
         @media (max-width: 768px) {
             nav {
                 padding: 15px 20px;
-            }
-
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
+                flex-direction: column;
+                gap: 10px;
             }
 
             .intro-content h1 {
@@ -375,12 +378,20 @@
 <body>
     <!-- 내비게이션 -->
     <nav>
-        <ul>
-            <li><a href="#intro">홈</a></li>
-            <li><a href="#daily">운동일지</a></li>
-            <li><a href="#knowhow">노하우</a></li>
-            <li><a href="#contact">연락처</a></li>
-        </ul>
+        <div class="nav-left">
+            <ul>
+                <li><a href="https://jkbong82.github.io/Home/game.html" target="_blank">게임</a></li>
+                <li><a href="https://gamma.app/docs/k4l2camrfxaipjb" target="_blank">감마포트폴리오</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="#intro">홈</a></li>
+                <li><a href="#daily">운동일지</a></li>
+                <li><a href="#knowhow">노하우</a></li>
+                <li><a href="#contact">연락처</a></li>
+            </ul>
+        </div>
     </nav>
 
     <!-- 인트로 섹션 -->
@@ -396,58 +407,7 @@
     <section id="daily">
         <div class="container">
             <h2 class="fade-in">Daily 운동일지</h2>
-            <div class="workout-log">
-                <div class="log-card fade-in">
-                    <h3>월요일 - 상체 운동</h3>
-                    <div class="date">2025.09.30</div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">벤치프레스</span>
-                        <span class="exercise-detail">60kg × 12회 × 4세트</span>
-                    </div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">덤벨 플라이</span>
-                        <span class="exercise-detail">15kg × 15회 × 3세트</span>
-                    </div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">숄더 프레스</span>
-                        <span class="exercise-detail">12kg × 12회 × 4세트</span>
-                    </div>
-                </div>
-
-                <div class="log-card fade-in">
-                    <h3>수요일 - 하체 운동</h3>
-                    <div class="date">2025.10.02</div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">스쿼트</span>
-                        <span class="exercise-detail">80kg × 10회 × 4세트</span>
-                    </div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">레그 프레스</span>
-                        <span class="exercise-detail">120kg × 12회 × 3세트</span>
-                    </div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">런지</span>
-                        <span class="exercise-detail">20kg × 15회 × 3세트</span>
-                    </div>
-                </div>
-
-                <div class="log-card fade-in">
-                    <h3>금요일 - 등/팔 운동</h3>
-                    <div class="date">2025.10.04</div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">랫풀다운</span>
-                        <span class="exercise-detail">50kg × 12회 × 4세트</span>
-                    </div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">바벨 로우</span>
-                        <span class="exercise-detail">45kg × 10회 × 3세트</span>
-                    </div>
-                    <div class="exercise-item">
-                        <span class="exercise-name">덤벨 컬</span>
-                        <span class="exercise-detail">12kg × 15회 × 3세트</span>
-                    </div>
-                </div>
-            </div>
+            <!-- 운동일지 카드들 -->
         </div>
     </section>
 
@@ -455,38 +415,7 @@
     <section id="knowhow">
         <div class="container">
             <h2 class="fade-in">40대 운동 노하우</h2>
-            <div class="tips-grid">
-                <div class="tip-card fade-in">
-                    <div class="tip-icon">🏃</div>
-                    <h3>워밍업 필수</h3>
-                    <p>최소 10분 이상 충분한 준비운동으로 부상을 예방하세요</p>
-                </div>
-                <div class="tip-card fade-in">
-                    <div class="tip-icon">⏰</div>
-                    <h3>규칙적인 루틴</h3>
-                    <p>일주일에 3-4회, 같은 시간대에 운동하는 습관을 만드세요</p>
-                </div>
-                <div class="tip-card fade-in">
-                    <div class="tip-icon">💧</div>
-                    <h3>충분한 수분 섭취</h3>
-                    <p>운동 전후로 물을 충분히 마셔 탈수를 예방하세요</p>
-                </div>
-                <div class="tip-card fade-in">
-                    <div class="tip-icon">😴</div>
-                    <h3>휴식과 회복</h3>
-                    <p>근육 성장에는 충분한 수면과 휴식이 필수입니다</p>
-                </div>
-                <div class="tip-card fade-in">
-                    <div class="tip-icon">🥗</div>
-                    <h3>단백질 섭취</h3>
-                    <p>체중 1kg당 1.5-2g의 단백질로 근육을 키우세요</p>
-                </div>
-                <div class="tip-card fade-in">
-                    <div class="tip-icon">📈</div>
-                    <h3>점진적 과부하</h3>
-                    <p>무리하지 않고 서서히 중량과 강도를 높이세요</p>
-                </div>
-            </div>
+            <!-- 노하우 카드들 -->
         </div>
     </section>
 
@@ -518,10 +447,12 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
