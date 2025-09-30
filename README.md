@@ -1,6 +1,6 @@
 # Home
 봉팔이의 포트폴리오
-![My Home logo](logo.png)
+![My Home logo](Logo.png)
 ## 직접 만든 포트폴리오
 - 홈페이지: https://jkbong82.github.io/Home/
 - 감마자료: https://40--eec6apb.gamma.site/
